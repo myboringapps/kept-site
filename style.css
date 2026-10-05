@@ -28,3 +28,29 @@ ul { padding-left: 22px; }
 .links a { display: block; background: var(--card); border-radius: 16px; padding: 16px 20px; color: var(--text); text-decoration: none; font-weight: 600; }
 .links a span { display: block; color: var(--muted); font-weight: 400; font-size: 15px; }
 footer { margin-top: 56px; color: var(--muted); font-size: 14px; border-top: 1px solid #1E232A; padding-top: 20px; }
+
+/* FAQ: native <details> so questions expand without JavaScript and work with keyboards and screen readers. */
+.faq { display: grid; gap: 10px; margin: 12px 0 8px; }
+.faq details { background: var(--card); border-radius: 16px; border: 1px solid transparent; transition: border-color .2s; }
+.faq details[open] { border-color: rgba(245, 165, 36, .35); }
+.faq summary {
+  list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  min-height: 52px; padding: 14px 20px; font-weight: 600; color: var(--text); border-radius: 16px;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: ""; flex: none; width: 9px; height: 9px; margin-right: 4px;
+  border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg) translateY(-3px); transition: transform .2s, border-color .2s;
+}
+.faq details[open] summary::after { transform: rotate(225deg) translate(-2px, -1px); border-color: var(--accent); }
+.faq summary:hover { color: var(--accent); }
+.faq summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.faq details p { margin: 0; padding: 0 20px 18px; }
+.cta { margin-top: 40px; }
+@media (prefers-reduced-motion: reduce) { .faq details, .faq summary::after { transition: none; } }
+@media (max-width: 480px) {
+  h1 { font-size: 30px; }
+  .faq summary { padding: 14px 16px; }
+  .faq details p { padding: 0 16px 16px; }
+}
